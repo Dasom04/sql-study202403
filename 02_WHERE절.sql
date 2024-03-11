@@ -78,7 +78,7 @@ OR job_id = 'FI_MGR'
 AND salary >= 6000;
 
 SELECT * FROM employees
-WHERE (job_id = 'IT_PRO'
+WHERE (job_id = 'IT_PROG'
 OR job_id = 'FI_MGR')
 AND salary >= 6000;
 
