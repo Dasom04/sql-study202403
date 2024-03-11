@@ -18,6 +18,7 @@ FROM employees
 WHERE department_id = 50;
 
 -- AND: 좌항, 우항 둘다 true
+SELECT *
 FROM employees
 WHERE salary >= 15000
 AND salary < 20000;
@@ -27,7 +28,7 @@ SELECT *
 FROM employees
 WHERE hire_date = '04/01/30';
 
--- 데이터의 행 제안 (BETWEEN, In, LIKE)
+-- 데이터의 행 제안 (BETWEEN, IN, LIKE)
 SELECT * FROM employees
 WHERE salary BETWEEN 15000 AND 20000;
 
@@ -72,7 +73,7 @@ WHERE commission_pct IS NOT NULL;
 -- AND가 OR보다 연산 순서가 빠름.
 -- 괄호 () 사용하면 우선 순위가 올라감.
 SELECT * FROM employees
-WHERE job_id = 'IT_PRO'
+WHERE job_id = 'IT_PROG'
 OR job_id = 'FI_MGR'
 AND salary >= 6000;
 
@@ -105,19 +106,4 @@ SELECT
     salary*12 AS pay
 FROM employees
 ORDER BY pay ASC;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
