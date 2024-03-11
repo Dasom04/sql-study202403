@@ -45,7 +45,7 @@ SELECT * FROM employees
 WHERE job_id IN ('IT_ PROG','AD_VP');
 
 -- LIKE 연산자 (지정 문자열 포함 여부)
--- %는 어떤한 문자든, _는 데이터의 자리 (위치)를 표현할 때
+-- %는 어떠한 문자든, _는 데이터의 자리 (위치)를 표현할 때
 -- %: anything % 앞에 문자 or 숫자 있으면 ~으로 시작한다면 이라는 뜻, % 뒤에 있으면 ~으로 끝나는것을 다 보여준다.
 -- 검색 기능 만들 때 많이 사용
 SELECT first_name, last_name, hire_date
