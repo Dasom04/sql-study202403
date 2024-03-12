@@ -15,7 +15,7 @@ WHERE i.auth_id = a.auth_id;
 
 -- auth_id 컬럼을 그냥 쓰면 모호하다 하고 뜹니다
 -- 그 이유는 양족에 모두 존재하는 칼럼이니까.
--- 컬럼에 테이블 이름을 붙이던지. 별칭을 쓰셔서
+-- 컬럼에 테이블 이름을 붙이던지, 별칭을 쓰셔서
 -- 확실하게 지목해 주세요.
 SELECT
     a.auth_id, i.title, i.content, a.name
@@ -29,13 +29,13 @@ SELECT
     a.auth_id, i.title, i.content, a.name
 FROM info i
 JOIN auth a
-ON i.auth_id = a.auth_id;
+ON i.auth_id = a.auth_id
 WHERE a.name = '이순신';
 
 -- 아우터 (외부) 조인
 -- 기준이 되는 테이블이 왼쪽으로 온다.
 SELECT *
-FROM info i LEFT OUTER JOIN auth a -- LEFT OUTER JOIN은 OUTER 생략 가능하다. (LEFT JOIN)
+FROM info i LEFT JOIN auth a -- LEFT OUTER JOIN에 OUTER 생략 가능하다.
 ON i.auth_id = a.auth_id;
 
 SELECT *
@@ -45,11 +45,11 @@ WHERE i.auth_id = a.auth_id(+);
 -- FULL 
 -- 좌측 테이블과 우측 테이블 데이터를 모두 읽어 표현하는 외부 조인
 SELECT *
-FROM info i FULL OUTER JOIN auth a -- OUTER 생략 가능하다. (FULL JOIN)
+FROM info i FULL JOIN auth a -- OUTER 생략 가능하다.
 ON i.auth_id = a.auth_id;
 
 -- CROSS JOIN은 JOIN조건을 설정하지 않기 때문에
--- 잔순히 모든 컬럼에 대한 JOIN을 진행합니다.
+-- 단순히 모든 컬럼에 대한 JOIN을 진행합니다.
 -- 실제로는 거의 사용하지 않습니다.
 SELECT * FROM info
 CROSS JOIN auth;
