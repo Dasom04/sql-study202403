@@ -136,17 +136,3 @@ WHERE LOWER(job_id) = 'it_prog';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
