@@ -70,6 +70,3 @@ SELECT TRUNC(sysdate, 'day') FROM dual; -- 주 기준으로 절사(해당 주의 일요일 날�
 
 
 
-
-
-
