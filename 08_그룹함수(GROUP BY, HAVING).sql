@@ -12,8 +12,8 @@ FROM employees;
 
 SELECT COUNT(*) FROM employees; -- 총 행 데이터의 수 (이때 null을 세어준다.)
 SELECT COUNT(first_name) FROM employees;
-SELECT COUNT(commission_pct) FROM employees; -- null이 아닌 행의 수를 구해준다.
-SELECT COUNT(manager_id) FROM employees; -- null이 아닌 행의 수를 구해준다.
+SELECT COUNT(commission_pct) FROM employees; -- null이 아닌 행의 수
+SELECT COUNT(manager_id) FROM employees; -- null이 아닌 행의 수
 
 SELECT * FROM employees;
 
