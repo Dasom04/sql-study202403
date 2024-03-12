@@ -77,7 +77,7 @@ RIGHT JOIN auth a
 ON i.auth_id = a.auth_id
 WHERE a.job = 'scientist';
 
--- 셀프조인이랑 동일 테이블 사이의 조인을 말합니다.
+-- 셀프 조인이란 동일 테이블 사이의 조인을 말합니다.
 -- 동일 테이블 칼럼을 통해 기존의 존재하는 값을 매칭시켜 가져올 때 사용합니다.
 SELECT
     e1.employee_id, e1.first_name, e1.manager_id,
