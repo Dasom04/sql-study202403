@@ -90,3 +90,6 @@ WHERE e.employee_id = jh.employee_id(+)
 AND jh.department_id(+) = 80;
 
 
+
+
+
