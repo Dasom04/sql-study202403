@@ -233,6 +233,21 @@ WHERE rn > 10 AND rn <= 20;
 DEPARTMENT_ID,DEPARTMENT_NAME을 출력하세요.
 */
 
+select * from EMPLOYEES;
+select * from DEPARTMENTS;
+
+SELECT
+    d.department_id, d.department_name
+    FROM
+    (
+    SELECT
+        e.last_name, e.job_id
+    FROM employees e LEFT JOIN departments d
+    ON e.department_id = d.department_id
+    WHERE job_id = 'SA_MAN'
+    )
+
+
 
 /*
 문제 14
