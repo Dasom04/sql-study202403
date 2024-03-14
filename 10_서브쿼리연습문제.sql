@@ -143,7 +143,7 @@ SELECT
 FROM departments d
 LEFT JOIN locations loc
 ON d.location_id = loc.location_id  -- 둘이 일치 하는것들을 조회한다
-ORDER BY d.department_id;
+ORDER BY department_id;
 
 
 
@@ -242,11 +242,11 @@ FROM
     (
     SELECT 
         last_name, job_id, department_id
-    FROM employees e
+    FROM employees
     WHERE job_id = 'SA_MAN'
     ) tbl
     JOIN departments d
-    ON e.department_id = d.department_id
+    ON tbl.department_id = d.department_id;
     
 
 
@@ -258,11 +258,11 @@ FROM
 */
 
     
-SELECT 
-    d.department_id, d.department_name, de.manager_id,
+SELECT
+    d.department_id, d.department_name, d.manager_id,
     a.total
 FROM departments d
-JOIN 
+JOIN
     (
     SELECT
         department_id, COUNT(*) AS total
@@ -270,7 +270,8 @@ JOIN
     GROUP BY department_id
     ) a
 ON d.department_id = a.department_id
-ORDER BY a.totla DESC;
+ORDER BY a.total DESC;
+
 
 
 SELECT
