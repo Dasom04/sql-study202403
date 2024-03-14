@@ -305,10 +305,10 @@ SELECT
     NVL(tbl.result, 0) AS 부서별평균급여
 FROM departments d
 JOIN locations loc
-ON d.location_id = loc.olcation_id
+ON d.location_id = loc.location_id
 LEFT JOIN (
     SELECT
-        department_id
+        department_id,
         TRUNC(AVG(salary),0) AS result
     FROM employees
     GROUP BY department_id
@@ -353,10 +353,10 @@ SELECT * FROM
             NVL(tbl.result, 0) AS 부서별평균급여
         FROM departments d
         JOIN locations loc
-        ON d.location_id = loc.olcation_id
+        ON d.location_id = loc.location_id
         LEFT JOIN (
             SELECT
-                department_id
+                department_id,
                 TRUNC(AVG(salary),0) AS result
             FROM employees
             GROUP BY department_id
