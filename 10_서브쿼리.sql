@@ -94,6 +94,8 @@ ex)(SELECT 1 FROM job_history jh , employees e
 -- SELECT 절에 서브쿼리를 붙이기.
 -- 스칼라 서브쿼리 라고도 칭합니다.
 -- 스칼라 서브쿼리: 실행 결과가 단일 값을 변환하는 서브쿼리. 주로 SELECT절이나, WHERE 절에서 사용됨.
+SELECT * FROM employees;
+
 
 SELECT 
     e.first_name,
