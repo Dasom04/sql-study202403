@@ -45,7 +45,7 @@ ROLLBACK;
 -- 컬럼 삭제
 -- 컬럼 안에 데이터가 있어도 삭제가 된다.
 ALTER TABLE dept2
-DROP COLUMN dept_bounus;
+DROP COLUMN dept_bonus;
 
 SELECT * FROM dept2;
 
