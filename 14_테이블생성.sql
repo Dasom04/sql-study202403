@@ -17,7 +17,7 @@ CREATE TABLE dept2 (
     dept_date DATE,
     dept_bounus NUMBER(10)
 );
-DESC dept2;
+DESC dept2; -- DESC 테이블 이름 -> 테이블의 구조를 확인할 수 있다.
 SELECT * FROM dept2;
 
 -- NUMBER와 VARCHAR2 타입의 길이를 확인
