@@ -9,7 +9,7 @@
 -- FOREIGN KEY: 참조하는 테이블의 PRIMARY KEY를 저장하는 컬럼
 -- CHECK: 정의된 형식만 저장되도록 허용.
 
--- 컬럼 레벨 제약 조건 (컬럼 선언마다 제약조건 지정)
+-- 컬럼 레벨 제약 조건 (컬럼 선언마다 제약 조건 지정)
 CREATE TABLE dept2 (
     dept_no NUMBER(2) CONSTRAINT dept2_deptno_pk PRIMARY KEY, -- 제약조건 식별자는 생략이 가능합니다. (오라클이 알아서 이름 지음)
     dept_name VARCHAR2(14) NOT NULL CONSTRAINT dept2_deptname_uk UNIQUE,
