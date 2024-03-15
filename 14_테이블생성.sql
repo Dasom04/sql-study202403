@@ -15,7 +15,7 @@ CREATE TABLE dept2 (
     dept_name VARCHAR2(14),
     loca VARCHAR2(15),
     dept_date DATE,
-    dept_bounus NUMBER(10)
+    dept_bonus NUMBER(10)
 );
 DESC dept2; -- DESC 테이블 이름 -> 테이블의 구조를 확인할 수 있다.
 SELECT * FROM dept2;
