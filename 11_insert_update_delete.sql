@@ -6,7 +6,7 @@ DESC departments;
 -- INSERT 첫번째 방법 (모든 컬럼 데이터를 한 번에 지정해서 삽입)
 INSERT INTO departments
 VALUES(300, '개발부', 100, 1500);  -- 모든 값을 다 줘야한다.
-VALUES(300, '개발부'); -- 에러 -> 칼럼을 지정하지 않고 값만 주는 경우에는 모든 값을 다 줘야 한다. (NIULL 허용 여부 상관 없이)
+-- VALUES(300, '개발부'); -- 에러 -> 칼럼을 지정하지 않고 값만 주는 경우에는 모든 값을 다 줘야 한다. (NIULL 허용 여부 상관 없이)
 
 SELECT * FROM departments;
 ROLLBACK; -- 실행 시점을 다시 되돌리는 키워드 (마지막 커밋 시점으로 되돌려준다.)
@@ -83,27 +83,14 @@ SELECT * FROM emps;
 DELETE FROM emps
 WHERE employee_id = 103;
 
+
 -- DELETE (서브쿼리)
 DELETE FROM emps
 WHERE department_id = (SELECT department_id FROM departments
                         WHERE department_name = 'IT');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+DELETE FROM departments
+WHERE department_name = '개발부';
 
 
