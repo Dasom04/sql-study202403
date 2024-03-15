@@ -10,8 +10,9 @@
 -- CHECK: 정의된 형식만 저장되도록 허용.
 
 -- 컬럼 레벨 제약 조건 (컬럼 선언마다 제약 조건 지정)
+-- 생성할 컬럼이름  데이터 타입 (크기) CONSTRAINT 테이블명_컬럼이름_제약조건의 종류  제약조건 키워드 순으로 작성
 CREATE TABLE dept2 (
-    dept_no NUMBER(2) CONSTRAINT dept2_deptno_pk PRIMARY KEY, -- 제약조건 식별자는 생략이 가능합니다. (오라클이 알아서 이름 지음)
+    dept_no NUMBER(2) CONSTRAINT dept2_deptno_pk PRIMARY KEY, -- 제약조건 식별자는 생략이 가능합니다. (오라클이 알아서 이름 (지음 나중에 찾기 어려움))
     dept_name VARCHAR2(14) NOT NULL CONSTRAINT dept2_deptname_uk UNIQUE,
     loca NUMBER(4) CONSTRAINT dept2_loca_locid_fk REFERENCES locations(location_id),
     dept_bonus NUMBER(10) CONSTRAINT dept2_bonus_ck CHECK(dept_bonus > 10000),
