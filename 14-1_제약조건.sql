@@ -89,7 +89,7 @@ ALTER TABLE dept2 DROP CONSTRAINT dept2_deptno_pk;
 --------------------------------------------------------------------------------
 
 -- 문제 1
-CREATE TABLE members (
+CREATE TABLE members ( -- 테이블 생성. 제약 조건을 넣을 수 있다.
     m_name VARCHAR2(20) NOT NULL,
     m_num NUMBER(3) CONSTRAINT mem_memnum_pk PRIMARY KEY,
     reg_date DATE NOT NULL CONSTRAINT mem_regdate_uk UNIQUE,
@@ -100,7 +100,7 @@ CREATE TABLE members (
 SELECT * FROM user_constraints
 WHERE table_name = 'MEMBERS';
 
-INSERT INTO members
+INSERT INTO members -- 방금 생성한 테이블에 데이터를 넣는다.
 VALUES('AAA', 1, '18-07-01', 'M', 1800);
 
 INSERT INTO members
