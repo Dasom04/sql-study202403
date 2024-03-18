@@ -190,13 +190,13 @@ SELECT * FROM jobs;
 
 CREATE OR REPLACE PROCEDURE my_param_test_proc
     (
-    -- IN: 반환 불가, 받는 용도로만 가능
+    -- IN: 반환 불가. 받는 용도로만 가능
     p_var1 IN VARCHAR2,
-    -- OUT: 받는 용도로는 활ㅇ용 불가능.
+    -- OUT: 받는 용도로는 활용 불가능.
     -- OUT이 되는 시점은 프로시저가 끝날 때, 그 전까지는 할당이 안됨.
     p_var2 OUT VARCHAR2,
     -- IN, OUT이 둘 다 가능함.
-    p_var IN OUT VARCHAR2
+    p_var3 IN OUT VARCHAR2
     )
 
 IS
@@ -268,7 +268,7 @@ END;
 DECLARE
     msg VARCHAR2(100);
 BEGIN 
-    my_new_job_proc('merong', msg);
+    my_new_job_proc('JOB1', msg);
     dbms_output.put_line(msg);
 END;
 
@@ -292,15 +292,15 @@ BEGIN
     */
     
     EXCEPTION
-        WHEN ZERO_DIVIED THEN
+        WHEN ZERO_DIVIDE THEN
             dbms_output.put_line('0으로 나누지면 안돼요!');
-            dbms_output.put_line('SQL ERROP CODE: ' || SQLCODE);
+            dbms_output.put_line('SQL ERROR CODE: ' || SQLCODE);
             dbms_output.put_line('SQL ERROP MSG: ' || SQLERRM);     
          WHEN OTHERS THEN
             -- WHEN 으로 설정한 예외가 아닌 다른 예외가 발생 시 OTHERS 실행.
             dbms_output.put_line('알 수 없는 예외 발생');
             
-    dbsm_output.put_line('익명블록 종료!');
+    dbms_output.put_line('익명블록 종료!');
 END;
 
 
