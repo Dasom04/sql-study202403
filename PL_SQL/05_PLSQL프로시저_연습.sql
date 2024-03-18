@@ -9,7 +9,7 @@ CREATE OR REPLACE PROCEDURE divisor_proc
 IS
     v_count NUMBER := 0;
 BEGIN
-    FOR i IN i..p_num
+    FOR i IN 1..p_num
     LOOP 
         IF MOD(p_num,i) = 0 THEN
             v_count := v_count + 1 ;
@@ -28,8 +28,8 @@ depts 테이블에
 */
 CREATE OR REPLACE PROCEDURE depts_proc
     (
-        p_dept_id IN dept.department_id%TYPE,
-        p_dept_name IN dept.department_name%TYPE,
+        p_dept_id IN depts.department_id%TYPE,
+        p_dept_name IN depts.department_name%TYPE,
         p_flag IN VARCHAR2
     )
     
@@ -48,7 +48,7 @@ BEGIN
         VALUES(p_dept_id, p_dept_name);
     ELSIF p_flag = 'U' THEN
         IF v_cnt = 0 THEN
-            dbms_output.put_line('삭제하고자 하는 부서가 존재하지 않습니다.');
+            dbms_output.put_line('수정하고자 하는 부서가 존재하지 않습니다.');
             RETURN;
         END IF;
         
@@ -75,9 +75,9 @@ BEGIN
             ROLLBACK;
 END;
 
-EXEC dept_proc(400, '영업부', 'D');
+EXEC depts_proc(80, '영업부', 'I');
 
-ALTER TABLE depts ADD CONSTRAINT dept_deptno_pk PRIMARY KEY(department_id);
+ALTER TABLE depts ADD CONSTRAINT depts_deptno_pk PRIMARY KEY(department_id);
 
 SELECT * FROM depts;
 
@@ -96,7 +96,7 @@ CREATE OR REPLACE PROCEDURE emp_hire_proc
         p_year OUT NUMBER 
     )
 IS
-    v_hire_date DATE;
+    v_hire_date employees.hire_date%TYPE;
 
 BEGIN
     SELECT
@@ -108,7 +108,7 @@ BEGIN
     
     p_year := TRUNC((sysdate - v_hire_date) / 365); -- 0 생략 가능
     
-    EXCEPTION WHEN OTHER THEN 
+    EXCEPTION WHEN OTHERS THEN 
      -- dbms_output.put_line(p_emp_id || '은(는) 없는 데이터 입니다.');
      p_year := 0;
 END;
