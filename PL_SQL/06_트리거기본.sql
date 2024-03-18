@@ -13,7 +13,7 @@ CREATE TABLE tbl_test(
     text VARCHAR2(20)
 );
 
--- 이름 지어주는거 자유
+
 CREATE OR REPLACE TRIGGER trg_test -- 이름 지어주는거 자유
     AFTER DELETE OR UPDATE -- 트리거의 동작 시점 (삭제 혹은 수정 이후에 동작)
     ON tbl_test -- 트리거를 부착할 테이블
