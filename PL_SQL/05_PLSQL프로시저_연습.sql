@@ -47,10 +47,19 @@ BEGIN
         (department_id, department_name)
         VALUES(p_dept_id, p_dept_name);
     ELSIF p_flag = 'U' THEN
+        IF v_cnt = 0 THEN
+            dbms_output.put_line('삭제하고자 하는 부서가 존재하지 않습니다.');
+            RETURN;
+        END IF;
+        
         UPDATE depts
         SET department_name = p_dept_name
         WHERE department_id = p_dept_id;
     ELSIF p_flag = 'D' THEN
+        IF v_cnt = 0 THEN
+            dbms_output.put_line('삭제하고자 하는 부서가 존재하지 않습니다.');
+            RETURN;
+        END IF;
         DELETE FROM depts
         WHERE department_id = p_dept_id;
     ELSE
@@ -66,7 +75,11 @@ BEGIN
             ROLLBACK;
 END;
 
-EXEC dept_proc(400, '개발부', 'I');
+EXEC dept_proc(400, '영업부', 'D');
+
+ALTER TABLE depts ADD CONSTRAINT dept_deptno_pk PRIMARY KEY(department_id);
+
+SELECT * FROM depts;
 
 
 
@@ -77,23 +90,38 @@ employee_id를 전달받아 employees에 존재하면,
 없다면 exception처리하세요
 */
 
+CREATE OR REPLACE PROCEDURE emp_hire_proc
+    (
+        p_emp_id IN employees.employee_id%TYPE,
+        p_year OUT NUMBER 
+    )
+IS
+    v_hire_date DATE;
+
+BEGIN
+    SELECT
+        hire_date
+    INTO
+        v_hire_date
+    FROM employees
+    WHERE employee_id = p_emp_id;
+    
+    p_year := TRUNC((sysdate - v_hire_date) / 365); -- 0 생략 가능
+    
+    EXCEPTION WHEN OTHER THEN 
+     -- dbms_output.put_line(p_emp_id || '은(는) 없는 데이터 입니다.');
+     p_year := 0;
+END;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+DECLARE
+    v_year NUMBER;
+BEGIN
+    emp_hire_proc(100, v_year);
+    IF v_year > 0 THEN
+        dbms_output.put_line('근속년수: ' || v_year || '년');
+    END IF;
+END;
 
 
 
