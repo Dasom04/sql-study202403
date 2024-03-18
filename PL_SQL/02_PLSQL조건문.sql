@@ -1,6 +1,6 @@
 
 DECLARE
-    v_salary Number := 0;
+    v_salary NUMBER := 0;
     v_department_id NUMBER := 0;
 BEGIN
     
@@ -34,7 +34,7 @@ END;
 
 -- CASE¹®
 DECLARE
-    v_salary Number := 0;
+    v_salary NUMBER := 0;
     v_department_id NUMBER := 0;
 BEGIN
     
