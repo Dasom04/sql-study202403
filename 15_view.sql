@@ -29,8 +29,8 @@ CREATE VIEW view_emp AS (
     WHERE department_id = 60
 );
 
-SELECT * from view_emp
-WHERE salary >= 6000;
+SELECT * from view_emp;
+
 
 
 -- 복합 뷰
@@ -131,6 +131,7 @@ CREATE OR REPLACE VIEW view_emp_test AS (
 WITH CHECK OPTION CONSTRAINT view_emp_test_ck; -- 변경 막는다.
 
 SELECT * FROM view_emp_test;
+DROP VIEW view_emp_test;
 
 UPDATE vieq_emp_test
 SET department_id = 100
