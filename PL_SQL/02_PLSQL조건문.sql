@@ -64,15 +64,15 @@ END;
 
 -- 중첩 IF문
 DECLARE
-    v_salary Number := 0;
+    v_salary NUMBER := 0;
     v_department_id NUMBER := 0;
     v_commission NUMBER := 0;
-BEGIN
+BEGIN 
     
     v_department_id := ROUND(DBMS_RANDOM.VALUE(10, 110), -1);
-    dbms_output.put_line('생성된 난수:' || v_department_id);
+    dbms_output.put_line('생성된 난수: ' || v_department_id);
     
-    SELECT 
+    SELECT
         salary, commission_pct
     INTO
         v_salary, v_commission
@@ -84,13 +84,8 @@ BEGIN
         IF v_commission > 0.15 THEN
             dbms_output.put_line('커미션이 15% 이상입니다!');
             dbms_output.put_line(v_salary * v_commission);
-        ELSE IF;
+        END IF;
     ELSE
-        dbms_output.put_line('커미션이 없어요ㅜ');
+        dbms_output.put_line('커미션이 없어요 ㅜㅜ');
     END IF;
-    
 END;
-
-
-
-
