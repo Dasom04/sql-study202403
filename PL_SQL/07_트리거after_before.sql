@@ -128,8 +128,8 @@ DECLARE
 BEGIN
     dbms_output.put_line('트리거 실행!');
     
-    v_total := NEW.total; -- 인서트로 들어온 데이터 주문수량을 얻어옴.
-    v_product_no := NEW.produch_no; -- 주문 상품의 번호를 얻어옴.
+    v_total := :NEW.total; -- 인서트로 들어온 데이터 주문수량을 얻어옴.
+    v_product_no := :NEW.product_no; -- 주문 상품의 번호를 얻어옴.
     
     SELECT 
         total
@@ -138,16 +138,28 @@ BEGIN
     WHERE product_no = v_product_no; -- 상품 번호를 가지고 재고 수량을 조회. -> v_product_total에 할당.
     
     IF v_product_total <= 0 THEN -- 재고가 없는 경우
-   
+        RAISE zero_total_exception;
     ELSIF v_total > v_product_total THEN -- 주문수량이 재고수량보다 많은 경우
-    
+        RAISE quantity_shortage_exception;
     END IF;
     
     
     
     -- 만약 재고 수량이 넉넉하다면 주문수량만큼 재고수량을 조정.
-    UPDATE product SET total = total -v_total
+    UPDATE product SET total = total - v_total
     WHERE product_no = v_product_no;
+   
+   EXCEPTION
+    WHEN quantity_shortage_exception THEN
+        -- 오라클에서 제공하는 사용자 정의 예외를 발생시키는 함수
+        -- 첫번째 매개값: 에러 코드 (사용자 정의 예외 -20000 ~ -20999까지)
+        -- 두번째 매개값: 에러 메세지
+        RAISE_APPLICATION_ERROR(-20001, '주문하신 수량보다 재고가 적어서 주문할 수 없습니다.');
+    
+    
+    WHEN zero_total_exception THEN
+        RAISE_APPLICATION_ERROR(-20002, '주문하신 상품의 재고가 없어서 주문할 수 없습니다.');
+   
     
 END;
 
@@ -155,8 +167,11 @@ INSERT INTO order_history VALUES(order_history_seq.NEXTVAL, 200, 1, 5, 50000);
 INSERT INTO order_history VALUES(order_history_seq.NEXTVAL, 200, 2, 1, 20000);
 INSERT INTO order_history VALUES(order_history_seq.NEXTVAL, 200, 3, 5, 25000);
 
+SELECT * FROM order_history;
+SELECT * FROM product;
 
-
+-- 트리거 내에서 예외가 발생하면 수행중인 INSERT 작업은 중단되며 ROLLBACK이 진행됩니다.
+INSERT INTO order_history VALUES(order_history_seq.NEXTVAL, 203, 1, 100, 1000000);
 
 
 
