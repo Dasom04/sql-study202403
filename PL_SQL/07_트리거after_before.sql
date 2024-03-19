@@ -64,5 +64,102 @@ DELETE FROM tbl_user WHERE id = 'test02';
 
 
 
+-- BEFORE 트리거
+CREATE OR REPLACE TRIGGER trg_user_insert -- 트리거 이름
+    BEFORE INSERT
+    ON tbl_user -- 트리거 넣을 테이블
+    FOR EACH ROW -- 모든 데이터에.
+BEGIN
+    -- INSERT 예정인 name의 값에서 첫글자(성)만 추출 후 뒤에 *을 세게 붙이겠다.
+    :NEW.name := SUBSTR(:NEW.name, 1, 1) || '***';
+END;
+
+INSERT INTO tbl_user VALUES('test04', '메롱이', '대전');
+INSERT INTO tbl_user VALUES('test05', '김오라클', '광주');
+
+ROLLBACK;
+-- TRIGGER BEGIN안에서 커밋, 롤백 못씀 밖에서는 쓸 수 있음
+
+--------------------------------------------------------------------------------
+
+-- 주문 히스토리
+CREATE TABLE order_history (
+    history_no NUMBER(5) PRIMARY KEY,
+    order_no NUMBER(5),
+    product_no NUMBER(5),
+    total NUMBER(10),
+    price NUMBER(10)
+);
+
+-- 상품
+CREATE TABLE product(
+    product_no NUMBER(5) PRIMARY KEY,
+    product_name VARCHAR2(20),
+    total NUMBER(5),
+    price NUMBER(5)
+);
+
+
+
+
+
+CREATE SEQUENCE order_history_seq NOCYCLE NOCACHE;
+CREATE SEQUENCE product_seq NOCYCLE NOCACHE;
+
+
+INSERT INTO product VALUES(product_seq.NEXTVAL, '피자', 100, 10000);
+INSERT INTO product VALUES(product_seq.NEXTVAL, '치킨', 100, 20000);
+INSERT INTO product VALUES(product_seq.NEXTVAL, '햄버거', 10, 5000);
+
+SELECT * FROM product;
+
+
+-- 주문 히스토리에 데이터가 들어오면 실행하는 트리거
+CREATE OR REPLACE TRIGGER trg_order_history
+    BEFORE INSERT
+    ON order_history
+    FOR EACH ROW
+DECLARE
+    v_total NUMBER;
+    v_product_no NUMBER;
+    v_product_total NUMBER;
+    quantity_shortage_exception EXCEPTION;
+    zero_total_exception EXCEPTION;
+BEGIN
+    dbms_output.put_line('트리거 실행!');
+    
+    v_total := NEW.total; -- 인서트로 들어온 데이터 주문수량을 얻어옴.
+    v_product_no := NEW.produch_no; -- 주문 상품의 번호를 얻어옴.
+    
+    SELECT 
+        total
+        INTO v_product_total
+    FROM product
+    WHERE product_no = v_product_no; -- 상품 번호를 가지고 재고 수량을 조회. -> v_product_total에 할당.
+    
+    IF v_product_total <= 0 THEN -- 재고가 없는 경우
+   
+    ELSIF v_total > v_product_total THEN -- 주문수량이 재고수량보다 많은 경우
+    
+    END IF;
+    
+    
+    
+    -- 만약 재고 수량이 넉넉하다면 주문수량만큼 재고수량을 조정.
+    UPDATE product SET total = total -v_total
+    WHERE product_no = v_product_no;
+    
+END;
+
+INSERT INTO order_history VALUES(order_history_seq.NEXTVAL, 200, 1, 5, 50000);
+INSERT INTO order_history VALUES(order_history_seq.NEXTVAL, 200, 2, 1, 20000);
+INSERT INTO order_history VALUES(order_history_seq.NEXTVAL, 200, 3, 5, 25000);
+
+
+
+
+
+
+
 
 
